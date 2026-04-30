@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: uptime-kuma
+    env: docker
+    dockerContext: .
+    dockerfilePath: docker/dockerfile
+    plan: starter # Requires a paid plan for disks
+    region: oregon # You can change this
+    healthCheckPath: /
+    disk:
+      name: uptime-kuma-data
+      mountPath: /app/data
+      sizeGB: 1
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: UPTIME_KUMA_IS_CONTAINER
+        value: "1"
